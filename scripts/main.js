@@ -4,6 +4,7 @@ TARGET = "mbostock/d3"
 
 window.onload = function feedMe() {
 
+	$("#title").append(TARGET);
 	callGitHub();
 
 }
@@ -17,16 +18,35 @@ function callGitHub() {
 	$.getJSON(url, function(data) {
 		var messages = [];
 		var time = [];
+		commitsToday = 0
 
-		for (var i = 0; i < 3; i++){
+		for (i in data){
 			messages.push(data[i].commit.message);
-			var time = getPrettyTime(data[i].commit.committer.date);
-			$("#commit-messages").append(messages[i] + " — " + time + "<br />");
+			time.push(data[i].commit.committer.date);
+
+			var now = moment();
+			console.log("Comparing: " + moment(time[i]).format("MMM Do YY") + "   with: " + now.format("MMM Do YY") );
+			if ( moment(time[i]).format("MMM Do YY") == now.format("MMM Do YY") ){
+				commitsToday += 1
+				console.log("today!")
+			}
+
+			$("#commit-messages").append(messages[i] + " — " + getPrettyTime(time[i]) + "<br />");
 		}
 	});
+
+	//console.log("Num commits today: " + commitsToday);
+	//display("#commit-messages", messages)
+	//display("#commit-messages", time)
+
 }
 
 function getPrettyTime (dirtyDate) {
 	return moment(dirtyDate).fromNow();
 }
 
+function display (selector, data){
+	for (i in data) {
+		$(selector).append(data[i])
+	}
+}
