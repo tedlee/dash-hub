@@ -1,6 +1,6 @@
 
 // In the format USER/REPO
-TARGET = "mbostock/d3"
+TARGET = "tedlee/dash-hub"
 
 window.onload = function feedMe() {
 
@@ -15,14 +15,16 @@ function callGitHub() {
 
 	// Send the request
 	var url =  "https://api.github.com/repos/" + TARGET + "/commits";
-	$.getJSON(url, function(data) {
+	var commitsToday = 0
+	
+	$.getJSON(url + "?callback=?", null, function(commits) {
 		var messages = [];
 		var time = [];
-		commitsToday = 0
+		
 
-		for (i in data){
-			messages.push(data[i].commit.message);
-			time.push(data[i].commit.committer.date);
+		for (i in commits.data){
+			messages.push(commits.data[i].commit.message);
+			time.push(commits.data[i].commit.committer.date);
 
 			var now = moment();
 			console.log("Comparing: " + moment(time[i]).format("MMM Do YY") + "   with: " + now.format("MMM Do YY") );
@@ -30,16 +32,19 @@ function callGitHub() {
 				commitsToday += 1
 				console.log("today!")
 			}
-
+			
 			$("#commit-messages").append(messages[i] + " — " + getPrettyTime(time[i]) + "<br />");
 		}
 	});
 
+	$("#commits-today").append(commitsToday)
 	//console.log("Num commits today: " + commitsToday);
 	//display("#commit-messages", messages)
 	//display("#commit-messages", time)
 
 }
+
+
 
 function getPrettyTime (dirtyDate) {
 	return moment(dirtyDate).fromNow();
