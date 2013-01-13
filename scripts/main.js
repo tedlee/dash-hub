@@ -15,33 +15,28 @@ function callGitHub() {
 
 	// Send the request
 	var url =  "https://api.github.com/repos/" + TARGET + "/commits";
-	var commitsToday = 0
+	var commitsToday = 0;
+	var messages = [];
+	var time = [];
 	
 	$.getJSON(url + "?callback=?", null, function(commits) {
-		var messages = [];
-		var time = [];
-		
 
 		for (i in commits.data){
 			messages.push(commits.data[i].commit.message);
 			time.push(commits.data[i].commit.committer.date);
 
-			var now = moment();
-			console.log("Comparing: " + moment(time[i]).format("MMM Do YY") + "   with: " + now.format("MMM Do YY") );
-			if ( moment(time[i]).format("MMM Do YY") == now.format("MMM Do YY") ){
+			if ( moment(time[i]).format("MMM Do YY") == moment().format("MMM Do YY") ){
 				commitsToday += 1
-				console.log("today!")
 			}
-			
+		}
+	})
+	.success(function() {
+		$("#commits-today").append(commitsToday)
+
+		for (var i = 0; i < 3; i++) {
 			$("#commit-messages").append(messages[i] + " — " + getPrettyTime(time[i]) + "<br />");
 		}
-	});
-
-	$("#commits-today").append(commitsToday)
-	//console.log("Num commits today: " + commitsToday);
-	//display("#commit-messages", messages)
-	//display("#commit-messages", time)
-
+	})
 }
 
 
