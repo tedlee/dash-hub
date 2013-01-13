@@ -37,6 +37,7 @@ function callGitHub() {
 	$.getJSON(url + "?callback=?", null, function(commits) {
 
 		for (i in commits.data){
+			console.log(commits.data[i].commit.message);
 			messages.push(commits.data[i].commit.message);
 			time.push(commits.data[i].commit.committer.date);
 
@@ -49,6 +50,9 @@ function callGitHub() {
 			}
 
 		}
+	})
+	.error(function() {
+		$("commits-today").append("Couldn't communicate with GitHub. She's playing hard to get.");
 	})
 	.complete(function() {
 		$("#commits-today").append("Commits Today: " + commitsToday);
