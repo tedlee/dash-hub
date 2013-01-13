@@ -9,6 +9,17 @@ window.onload = function feedMe() {
 
 }
 
+window.setInterval(function(){
+	cleanUp();
+	callGitHub();
+}, 60000);
+
+function cleanUp() {
+	$("#commits-today").empty();
+	$("#commits-weekly").empty();
+	$("#commit-messages").empty();
+}
+
 function callGitHub() {
 	
 	console.log("In callGitHub");
@@ -40,8 +51,8 @@ function callGitHub() {
 		}
 	})
 	.complete(function() {
-		$("#commits-today").append(commitsToday);
-		$("#commits-weekly").append(commitsWeekly);
+		$("#commits-today").append("Commits Today: " + commitsToday);
+		$("#commits-weekly").append("Commits this week: " + commitsWeekly);
 
 		for (var i = 0; i < 3; i++) {
 			$("#commit-messages").append(messages[i] + " — " + getPrettyTime(time[i]) + "<br />");
