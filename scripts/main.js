@@ -19,11 +19,12 @@ function callGitHub() {
 
 	// Send the request
 	var url =  "https://api.github.com/repos/" + TARGET + "/commits";
+	var commitsToday = 0
 	
 	$.getJSON(url + "?callback=?", null, function(commits) {
 		var messages = [];
 		var time = [];
-		commitsToday = 0
+		
 
 		for (i in commits.data){
 			messages.push(commits.data[i].commit.message);
@@ -35,11 +36,12 @@ function callGitHub() {
 				commitsToday += 1
 				console.log("today!")
 			}
-			$("#commits-today").append(commitsToday)
+			
 			$("#commit-messages").append(messages[i] + " — " + getPrettyTime(time[i]) + "<br />");
 		}
 	});
 
+	$("#commits-today").append(commitsToday)
 	//console.log("Num commits today: " + commitsToday);
 	//display("#commit-messages", messages)
 	//display("#commit-messages", time)
