@@ -12,12 +12,12 @@ window.onload = function feedMe() {
 window.setInterval(function(){
 	cleanUp();
 	callGitHub();
-}, 60000);
+}, 600000);
 
 function cleanUp() {
 	$("#commits-today").empty();
 	$("#commits-weekly").empty();
-	$("#commit-messages").empty();
+	$("ul").empty();
 }
 
 function callGitHub() {
@@ -55,11 +55,11 @@ function callGitHub() {
 		$("commits-today").append("Couldn't communicate with GitHub. She's playing hard to get.");
 	})
 	.complete(function() {
-		$("#commits-today").append("Commits Today: " + commitsToday);
-		$("#commits-weekly").append("Commits this week: " + commitsWeekly);
+		$("#commits-today").append(commitsToday + " Commits Today");
+		//$("#commits-weekly").append("Commits this week: " + commitsWeekly);
 
 		for (var i = 0; i < 3; i++) {
-			$("#commit-messages").append(messages[i] + " — " + getPrettyTime(time[i]) + "<br />");
+			$("ul").append("<li>" + messages[i] + " — " + getPrettyTime(time[i]) + ".</li>");
 		}
 	})
 }

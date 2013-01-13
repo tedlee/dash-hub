@@ -6,8 +6,9 @@
 	<link rel="stylesheet" href="styles/style.css" type="text/css" />
 	<link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Ubuntu:bold" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Raleway:100,200,400,700" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="scripts/main.js"></script>
-	<script type="text/javascript" src="scripts/live.js"></script>
+	<!-- <script type="text/javascript" src="scripts/live.js"></script> -->
 	<script type="text/javascript" src="scripts/jquery.js"></script>
 	<script type="text/javascript" src="scripts/moment.min.js"></script>
 
@@ -20,17 +21,20 @@
 
 <div id="main">
 
-	<div id="title"> Monitoring Project: <!-- Title appended in JS --> </div>
-	
-	<!-- Number of Lines Today -->
-	<div id="loc-today"></div>
+	<div id="title"> <!-- Title appended in JS --> </div>
+	<div id="top-bar"></div>
 
-	<!-- Messages from last three commits -->
-	<div id="commit-messages">
-
-	</div>
 	<!-- Number of Commits today -->
 	<div id="commits-today"></div>
+	
+	<div class="divider"></div>
+	
+	<!-- Messages from last three commits -->
+	<div id="commit-messages">
+		<ul></ul>
+
+	</div>
+
 
 	<!-- Number of Commits this Week -->
 	<div id="commits-weekly"></div>
