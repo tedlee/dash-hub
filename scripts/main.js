@@ -67,7 +67,10 @@ function callGitHub(repo) {
 		//$("#commits-weekly").append("Commits this week: " + commitsWeekly);
 
 		for (var i = 0; i < 3; i++) {
-			$("ul").append("<li>" + messages[i] + " — " + getPrettyTime(time[i]) + ".</li>");
+			if (messages[i] != undefined) {
+				$("ul").append("<li>" + messages[i] + " — " + getPrettyTime(time[i]) + ".</li>");
+			}
+			else{console.log("NO MORE COMMITS")} 
 		}
 	})
 }
