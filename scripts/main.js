@@ -1,4 +1,3 @@
-
 // In the format USER/REPO
 TARGET = "tedlee/dash-hub"
 
@@ -12,14 +11,12 @@ window.onload = function feedMe() {
 	    }
 	});
 
-	//$("#title").append(TARGET);
 	callGitHub(TARGET);
-
 }
 
 window.setInterval(function(){
-	callGitHub(repo);
-}, 600000);
+	callGitHub(TARGET);
+}, 60000);
 
 function cleanUp() {
 	$("#commits-today").empty();
@@ -38,23 +35,22 @@ function callGitHub(repo) {
 	var messages = [];
 	var time = [];
 	var now = moment();
-
-	console.log(now.format("w"))
 	
 	$.getJSON(url + "?callback=?", null, function(commits) {
-
 		for (i in commits.data){
-			console.log(commits.data[i].commit.message);
+			//console.log(commits.data[i].commit.message);
 			messages.push(commits.data[i].commit.message);
 			time.push(commits.data[i].commit.committer.date);
 
 			if ( moment(time[i]).format("MMM Do YY") == now.format("MMM Do YY") ){
 				commitsToday += 1
-			}
+			};
 
+			/*
 			if ( moment(time[i]).format("w") == now.format("w")){
 				commitsWeekly +=1
-			}
+			};
+			*/
 
 		}
 	})
@@ -68,10 +64,12 @@ function callGitHub(repo) {
 
 		for (var i = 0; i < 3; i++) {
 			if (messages[i] != undefined) {
-				$("ul").append("<li>" + messages[i] + " — " + getPrettyTime(time[i]) + ".</li>");
+				$("ul").append("<li>" + messages[i] + " — <span class=\"commitTime\">" + getPrettyTime(time[i]) + ".</span></li>");
 			}
-			else{console.log("NO MORE COMMITS")} 
-		}
+			else {
+				console.log("NO MORE COMMITS FOR YOU");
+			} 
+		};
 	})
 }
 

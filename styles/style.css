@@ -78,7 +78,7 @@ ul{
 	width: 80%;
 	margin: 20px auto 5px;
 	list-style: none;
-	font-weight: 200;
+	font-weight: 400;
 	text-align: center;
 	font-size: 1.5em;
 }
@@ -96,6 +96,10 @@ a{
 	padding-top: 15px;
 	padding-right: 25px;
 	
+}
+
+.commitTime{
+	font-weight: 200;
 }
 
 .edit-repo {
