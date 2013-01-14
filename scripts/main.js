@@ -4,14 +4,21 @@ TARGET = "tedlee/dash-hub"
 
 window.onload = function feedMe() {
 
-	$("#title").append(TARGET);
-	callGitHub();
+	$("#repoName").keyup(function(event){
+	    if(event.keyCode == 13){
+	        TARGET = $("#repoName").val();
+	        callGitHub(TARGET);
+	        console.log(TARGET);
+	    }
+	});
+
+	//$("#title").append(TARGET);
+	callGitHub(TARGET);
 
 }
 
 window.setInterval(function(){
-	cleanUp();
-	callGitHub();
+	callGitHub(repo);
 }, 600000);
 
 function cleanUp() {
@@ -20,12 +27,12 @@ function cleanUp() {
 	$("ul").empty();
 }
 
-function callGitHub() {
+function callGitHub(repo) {
 	
 	console.log("In callGitHub");
 
 	// Send the request
-	var url =  "https://api.github.com/repos/" + TARGET + "/commits";
+	var url =  "https://api.github.com/repos/" + repo + "/commits";
 	var commitsToday = 0;
 	var commitsWeekly = 0;
 	var messages = [];
@@ -55,6 +62,7 @@ function callGitHub() {
 		$("commits-today").append("Couldn't communicate with GitHub. She's playing hard to get.");
 	})
 	.complete(function() {
+		cleanUp();
 		$("#commits-today").append(commitsToday + " Commits Today");
 		//$("#commits-weekly").append("Commits this week: " + commitsWeekly);
 
@@ -64,6 +72,9 @@ function callGitHub() {
 	})
 }
 
+function updateRepo() {
+	console.log("Trying to update repo")
+}
 
 
 function getPrettyTime (dirtyDate) {

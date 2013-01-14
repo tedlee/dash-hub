@@ -20,8 +20,15 @@
 <body>
 
 <div id="main">
-
-	<div id="title"> <!-- Title appended in JS --> </div>
+	<!-- <a href="#" class="edit-button">edit</a>
+	<div id="title"></div> -->
+	
+    <form id="repoBox" onsubmit="return false">
+	    <input type="text" class="edit-repo" id="repoName" value="tedlee/dash-hub" autocomplete="off"/>
+	    <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+    </form>
+	
+	
 	<div id="top-bar"></div>
 
 	<!-- Number of Commits today -->

@@ -86,3 +86,32 @@ ul{
 li{
 	padding-top: 20px;
 }
+
+a{
+
+}
+
+#repoBox{
+	float: right;
+	padding-top: 15px;
+	padding-right: 25px;
+	
+}
+
+.edit-repo {
+	border: 3px solid rgb(30, 28, 28);
+	border: 3px solid rgba(30, 28, 28, 0.05);
+	-webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+	outline: none;
+	font-size: 1em;
+	font-weight: bold;
+	display: block;
+	background-color:#ffffff;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	color:#383838;
+	padding:2px 8px;
+	text-decoration:none;
+}
